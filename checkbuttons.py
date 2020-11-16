@@ -1,10 +1,8 @@
 import kivy
 
 from kivy.config import Config
-#Config.write()
-#Config.set('graphics', 'resizable', '0') 
 Config.set('graphics', 'width', '300')
-Config.set('graphics', 'height', '350')
+Config.set('graphics', 'height', '450')
 Config.write()
 
 from kivy.app import App
@@ -34,6 +32,8 @@ class BoxLayoutDemo(App):
         superBox= BoxLayout(orientation='vertical', size_hint_x= None,padding=( 10, 0, 0, 10))
         caja1 = GridLayout(cols=2, row_force_default=True, row_default_height=40)
         caja2 = GridLayout(cols=2, row_force_default=True, row_default_height=40)
+        caja3 = GridLayout(cols=2, row_force_default=True, row_default_height=40)
+        caja4 = GridLayout(cols=2, row_force_default=True, row_default_height=40)
         l1 = Label(text='Valor uno',halign='left', size_hint=(None,None),size= (75, 40))
         l1.bind(size=l1.setter('texture_size'))    
         
@@ -49,6 +49,12 @@ class BoxLayoutDemo(App):
         self.etiqueta2=Label(text='Restar',size_hint=(None,None),size= (75, 40))
         self.check2 = CheckBox(size_hint=(None,None),size= (75, 40))
 
+        self.etiqueta3=Label(text='Multiplicar',size_hint=(None,None),size= (75, 40))
+        self.check3 = CheckBox(size_hint=(None,None),size= (75, 40))
+
+        self.etiqueta4=Label(text='Dividir',size_hint=(None,None),size= (75, 40))
+        self.check4 = CheckBox(size_hint=(None,None),size= (75, 40))
+
         self.textinput2 = TextInput(size_hint=(None,None),size= (175, 50))
         self.textinput2.bind(text=on_text2)
 
@@ -57,21 +63,27 @@ class BoxLayoutDemo(App):
         button1.bind(on_press=self.buttonClicked)
         
 
-        self.l3 = Label(text='Resultado',halign='left', size_hint=(None,None),size= (280, 40))
+        self.l3 = Label(text='Resultado',halign='left', size_hint=(None,None),size= (280, 80))
         self.l3.bind(size=self.l3.setter('texture_size'))
 
         superBox.add_widget(l1)
         superBox.add_widget(self.textinput1)
         superBox.add_widget(l2)
-
         superBox.add_widget(self.textinput2)
+
         caja1.add_widget(self.etiqueta1)
         caja1.add_widget(self.check1)
         caja2.add_widget(self.etiqueta2)
         caja2.add_widget(self.check2)
-        
+        caja3.add_widget(self.etiqueta3)
+        caja3.add_widget(self.check3)
+        caja4.add_widget(self.etiqueta4)
+        caja4.add_widget(self.check4)
+
         superBox.add_widget(caja1)
         superBox.add_widget(caja2)
+        superBox.add_widget(caja3)
+        superBox.add_widget(caja4)
 
         superBox.add_widget(button1)
         
@@ -90,7 +102,14 @@ class BoxLayoutDemo(App):
           s="{}{}+{}={}\n".format(s,valor1,valor2,valor3)
          if self.check2.active:
           valor3=valor1-valor2
-          s="{}{}-{}={}".format(s,valor1,valor2,valor3)
+          s="{}{}-{}={}\n".format(s,valor1,valor2,valor3)
+         if self.check3.active:
+          valor3=valor1*valor2
+          s="{}{}x{}={}\n".format(s,valor1,valor2,valor3)
+         if self.check2.active:
+          valor3=valor1/valor2
+          s="{}{}÷{}={}".format(s,valor1,valor2,valor3)
+
          self.l3.text=s 
         except:
          self.l3.text="Se introducioeron datos erroneos!!";   
