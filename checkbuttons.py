@@ -106,13 +106,13 @@ class BoxLayoutDemo(App):
          if self.check3.active:
           valor3=valor1*valor2
           s="{}{}x{}={}\n".format(s,valor1,valor2,valor3)
-         if self.check2.active:
+         if self.check4.active:
           valor3=valor1/valor2
           s="{}{}÷{}={}".format(s,valor1,valor2,valor3)
 
          self.l3.text=s 
         except:
-         self.l3.text="Se introducioeron datos erroneos!!";   
+         self.l3.text="Se introducieron datos erroneos!!"
 
     
    
